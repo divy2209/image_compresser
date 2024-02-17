@@ -5,13 +5,13 @@
 - Add .env file at the root
 
 - Run these commands to run the app directly
-  -npm run build
-  -npm start
+  `npm run build`
+  `npm start`
   \*open this url (http://localhost:3001/)
 
 - Run these commands to run the app on docker(open terminal at root directory)
-  -docker build . -t image-compressor:v1
-  -docker run -d -p 8001:3001 image-compressor:v1
+  `docker build . -t image-compressor:v1`
+  `docker run -d -p 8001:3001 image-compressor:v1`
   \*open this url (http://localhost:8001/)
 
 <--Directions for access hoster app-->
