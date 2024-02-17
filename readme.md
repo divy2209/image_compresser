@@ -1,36 +1,42 @@
-<--Directions for Cloning and running locally-->
+## Directions for Cloning and running locally
 
 - Clone the app to your local
 
 - Add .env file at the root
 
 - Run these commands to run the app directly
+  <br>
   `npm run build`
+  <br>
   `npm start`
+  <br>
   \*open this url (http://localhost:3001/)
 
 - Run these commands to run the app on docker(open terminal at root directory)
+  <br>
   `docker build . -t image-compressor:v1`
+  <br>
   `docker run -d -p 8001:3001 image-compressor:v1`
+  <br>
   \*open this url (http://localhost:8001/)
 
-<--Directions for access hoster app-->
+## Directions for access hoster app
 
 - Open this url (https://image-compression-gnd1.onrender.com/)
 
-<--Features-->
+## Features
 
 - Let's you upload any image file with image mime type
 - Filter's out the unsupported types of image for compression
 - Shows the respective messages on screen
 
-<--Technicals-->
+## Technicals
 
 - Pushing code to main branch triggers the auto-deployment to Render
 - Unit tests will execute prior to deployement
 - Docker is also enabled for this app
 
-<--Used-->
+## Used
 
 - Express for the app
 - EJS for ui
