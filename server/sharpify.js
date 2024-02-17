@@ -14,7 +14,7 @@ module.exports = {
                 tiff: {quality: 80},
             }
             if(config[format]==null){
-                throw new Error("Unsupported image format");
+                throw new Error();
             }
             const newFileBuffer = await img[format](config[format]).toBuffer();
             return newFileBuffer;

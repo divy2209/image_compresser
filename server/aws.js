@@ -1,7 +1,7 @@
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
 class AWS {
-    constructor(){
+    constructor(bucketName){
         this.s3Client = new S3Client({
             region: process.env.AWS_S3_REGION,
             credentials: {
@@ -9,13 +9,14 @@ class AWS {
               secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
             },
           });
+          this.bucketName = bucketName ?? process.env.AWS_S3_BUCKET_NAME;
     }
 
-    async send(buffer, originFileName) {
+    async send(originFileName, buffer) {
         const timeStamp = Date.now();
         const ref = `${timeStamp}-${originFileName}`;
         const params = {
-            Bucket: process.env.AWS_S3_BUCKET_NAME,
+            Bucket: this.bucketName,
             Key: ref,
             Body: buffer,
           };
