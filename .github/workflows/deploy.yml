@@ -8,20 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v2
-
-      - name: Install Homebrew & add to Path
-        run: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-      - name: Install Render CLI
-        run: |
-          cd /home/linuxbrew/.linuxbrew/bin
-          pwd
-          ls
-          brew tap render-oss/render
-          brew install render
-
-      - name: Check Render CLI version
-        run: render --version
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+          wait-for-success: true
