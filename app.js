@@ -14,8 +14,8 @@ const upload = multer({storage});
 app.set('view engine', 'ejs');
 
 // upload form
-app.get("/upload", (req, res) => {
-    res.render("upload");
+app.get("/", (req, res) => {
+    res.render("home");
 });
 
 // upload request

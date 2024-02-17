@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        body {
+          margin: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          background-color: rgba(80, 134, 141);
+          background-size: cover;
+          background-position: center;
+        }
+    
+        .container {
+          background-color: rgba(255, 255, 255, 0.6);
+          padding: 20px;
+          border-radius: 10px;
+        }
+      </style>
+    <body>
+        <div class="container">
+            <h1>Upload Image</h1>
+            <form method="POST" action="/upload" enctype="multipart/form-data">
+                <input type="file" name="image", accept="image/*">
+                <input type="submit">
+            </form>
+        </div>
+    </body>
+</html>
