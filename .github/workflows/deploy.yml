@@ -13,9 +13,8 @@ jobs:
 
       - name: Install Render CLI
         run: |
-          curl -O https://render.com/download/render
-          chmod +x render
-          sudo mv render /usr/local/bin
+          brew tap render-oss/render
+          brew install render
 
       - name: Check Render CLI version
         run: render --version
