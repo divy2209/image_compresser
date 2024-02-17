@@ -1,4 +1,6 @@
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { S3Client, PutObjectCommand, GetObjectCommand } = require('@aws-sdk/client-s3');
+const fs = require('fs');
+const path = require('path');
 
 class AWS {
     constructor(bucketName){
@@ -15,13 +17,34 @@ class AWS {
     async send(originFileName, buffer) {
         const timeStamp = Date.now();
         const ref = `${timeStamp}-${originFileName}`;
-        const params = {
+        const putParams = {
             Bucket: this.bucketName,
             Key: ref,
             Body: buffer,
           };
 
-        return await this.s3Client.send(new PutObjectCommand(params));
+        await this.s3Client.send(new PutObjectCommand(putParams));
+
+        const getParams = {
+          Bucket: this.bucketName,
+          Key: ref,
+        };
+
+        return this.s3Client.send(new GetObjectCommand(getParams)).then(async response => {
+          // Construct the path to the Downloads folder
+          const downloadsPath = path.join(__dirname, 'Downloads', `downloaded_image_${ref}`);
+
+          const fileStream = fs.createWriteStream(downloadsPath);
+
+          // Pipe the data from the S3 stream to the file stream
+          response.Body.pipe(fileStream);
+
+          // Wait for the stream to finish writing
+          await new Promise((resolve, reject) => {
+            fileStream.on('finish', resolve);
+            fileStream.on('error', reject);
+          });
+        });
     }
 }
 

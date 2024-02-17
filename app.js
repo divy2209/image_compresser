@@ -23,6 +23,7 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     if(!req.file){
         return res.status(400).json({error: "Image file is required"});
     }
+
     // Compressing
     const buffer = await sharpify.compress(req.file.buffer).then(buffer => {
         // Uploading to s3 bucket

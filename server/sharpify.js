@@ -7,11 +7,11 @@ module.exports = {
             const meta = await img.metadata();
             const {format} = meta;
             const config = {
-                jpeg: {quality: 80, progressive: true},
-                webp: {quality: 80},
-                png: {compressionLevel: 9, adaptiveFiltering: true},
-                gif: {quality: 80},
-                tiff: {quality: 80},
+                jpeg: {quality: 40, progressive: true},
+                webp: {quality: 40},
+                png: {compressionLevel: 4, adaptiveFiltering: true},
+                gif: {quality: 40},
+                tiff: {quality: 40},
             }
             if(config[format]==null){
                 throw new Error();
