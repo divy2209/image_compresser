@@ -17,7 +17,7 @@ jobs:
 
       - name: Install Render CLI
         run: |
-          cd /home/linuxbrew/.linuxbrew
+          cd /home/linuxbrew/.linuxbrew/bin
           pwd
           brew tap render-oss/render
           brew install render
