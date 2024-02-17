@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "npm install && npm test",
-    "serve": "node index.js"
+    "serve": "node index.js",
+    "start": "npm run serve"
   },
   "keywords": [],
   "author": "",
