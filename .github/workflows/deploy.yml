@@ -13,3 +13,12 @@ jobs:
 
       - name: Check Render CLI version
         run: render --version || echo "Render CLI is not installed"
+
+      - name: Install Render CLI
+        run: |
+          curl -O https://render.com/download/render
+          chmod +x render
+          sudo mv render /usr/local/bin
+
+      - name: Check Render CLI version
+        run: render --version
