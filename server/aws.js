@@ -23,28 +23,28 @@ class AWS {
             Body: buffer,
           };
 
-        return this.s3Client.send(new PutObjectCommand(putParams));
+        await this.s3Client.send(new PutObjectCommand(putParams));
 
-        // const getParams = {
-        //   Bucket: this.bucketName,
-        //   Key: ref,
-        // };
+        const getParams = {
+          Bucket: this.bucketName,
+          Key: ref,
+        };
 
-        // return this.s3Client.send(new GetObjectCommand(getParams)).then(async response => {
-        //   // Construct the path to the Downloads folder
-        //   const downloadsPath = path.join(__dirname, 'Downloads', `downloaded_image_${ref}`);
+        return this.s3Client.send(new GetObjectCommand(getParams)).then(async response => {
+          // Construct the path to the Downloads folder
+          const downloadsPath = path.join(__dirname, `downloaded_image_${ref}`);
 
-        //   const fileStream = fs.createWriteStream(downloadsPath);
+          const fileStream = fs.createWriteStream(downloadsPath);
 
-        //   // Pipe the data from the S3 stream to the file stream
-        //   response.Body.pipe(fileStream);
+          // Pipe the data from the S3 stream to the file stream
+          response.Body.pipe(fileStream);
 
-        //   // Wait for the stream to finish writing
-        //   await new Promise((resolve, reject) => {
-        //     fileStream.on('finish', resolve);
-        //     fileStream.on('error', reject);
-        //   });
-        // });
+          // Wait for the stream to finish writing
+          await new Promise((resolve, reject) => {
+            fileStream.on('finish', resolve);
+            fileStream.on('error', reject);
+          });
+        });
     }
 }
 
